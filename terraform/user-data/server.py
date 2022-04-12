@@ -12,12 +12,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
 class BaseServer(BaseHTTPRequestHandler):
-    def _set_headers(self):
+    def _set_headers(self, contenttype='application/json'):
         """
         Set default headers
         """
         self.send_response(200)
-        self.send_header('Content-type', 'application/json')
+        self.send_header('Content-type', contenttype)
         try:
             self.send_header('X-Instance', '{}'.format(socket.gethostname()))
         except:
@@ -28,7 +28,12 @@ class BaseServer(BaseHTTPRequestHandler):
         """
         Process GET request
         """
-        if not self.check_ContentType():
+        # Default web path to handle ELB health checks
+        if self.path == '/':
+            self._set_headers(contenttype='text/html')
+            self.wfile.write('There is nothing here'.encode('utf-8'))
+        # Any other requests are considered as API and should contain proper content type header
+        elif not self.check_ContentType():
             self.send_error(415, 'Wrong content type',
                             'Acceptable content-type: application/json')
         else:

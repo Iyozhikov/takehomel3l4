@@ -1,14 +1,21 @@
 
 
+##############################################
+# Module variables
+##############################################
 
 variable "cidr_block" {
   default     = "10.100.0.0/16"
   description = "Default VPC cidr range"
 }
 
-variable "subnet" {
+variable "subnet-primary" {
   default     = "10.100.0.0/24"
-  description = "Default subnet range"
+  description = "Default primary subnet range"
+}
+variable "subnet-secondary" {
+  default     = "10.100.1.0/24"
+  description = "Default secondary subnet range"
 }
 
 variable "security_group_rules" {

@@ -1,13 +1,9 @@
 
-terraform {
-  # backend "s3" {
-  #     bucket         = "takehomel3l4"      # the name of the S3 bucket to keep states
-  #     encrypt        = true
-  #     key            = "/users/igor"       # the path to the terraform.tfstate file
-  #     region         = "us-west-2"         # the location of the bucket
-  #     dynamodb_table = "takehomel3l4-lock" # the name of the table to store the lock
+##############################################
+# Providers
+##############################################
 
-  # }
+terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -26,5 +22,3 @@ provider "aws" {
     }
   }
 }
-
-data "aws_region" "current" {}

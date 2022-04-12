@@ -1,0 +1,14 @@
+# Terraform files
+.terraform
+*.tfstate*
+
+# OS X files
+.history
+.DS_Store
+
+# Python files
+__pycache__
+*.pyc
+
+# Visual Studio code
+.vscode

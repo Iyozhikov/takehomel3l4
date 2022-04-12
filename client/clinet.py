@@ -71,6 +71,10 @@ def get_json_data(webpath: str) -> dict:
         connection.request(method='GET', url=webpath,
                            body=None, headers=headers)
         response = connection.getresponse()
+        instance_name = response.getheader('X-Instance')
+        if instance_name != None:
+            print('Reading response from instance: {}'.format(
+                colored(instance_name, 'green')))
         response_data = process_response(response)
         json_response = json.loads(response_data)
         return json_response
